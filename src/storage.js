@@ -9,10 +9,16 @@ CREATE TABLE IF NOT EXISTS chat_log (
     id      VARCHAR (255) PRIMARY KEY DESC
                           NOT NULL
                           UNIQUE,
+    stamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     room_id VARCHAR (255) NOT NULL,
     message BLOB
 );
 CREATE INDEX IF NOT EXISTS chat_log_room_idx ON chat_log(room_id);
+CREATE INDEX IF NOT EXISTS chat_log_stamp_idx ON chat_log(stamp);
+`;
+
+const MESSAGES_CLEAN = `
+DELETE FROM chat_log WHERE stamp < datetime('now', '-7 day');
 `;
 
 const MESSAGES_UPSERT = `
@@ -65,6 +71,13 @@ class MessageLog {
         const db = this[$info].db;
         await db.runAsync(MESSAGES_UPSERT, id, room_id, message);
     }
+
+    async removeOld() {
+        debug('Removing old messages from log');
+        const db = this[$info].db;
+        await db.runAsync(MESSAGES_CLEAN);
+    }
+
 
     async fetchFor(room_id, limit, start_id) {
         const db = this[$info].db;

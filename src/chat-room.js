@@ -90,6 +90,9 @@ class ChatRoom {
 
         queue.msgs.push(msg);
 
+        // Delete old messages
+        ChatLog.removeOld();
+
         // Record message
         if (this[$meta].enableLog && msg.parsed && msg.parsed['to'] === this.roomName) {
             debug('Saving chat log', msg.serialized);
