@@ -70,5 +70,5 @@ function hashFnv32a(str, seed) {
 
 vue.filter('avatar_url', function (value) {
     var type = hashFnv32a(value) % 2 ? 'female' : 'male';
-    return '//avatars.dicebear.com/v1/'+type+'/'+value+'/128.png';
+    return '//avatars.dicebear.com/v2/'+type+'/'+value+'.svg';
 });
