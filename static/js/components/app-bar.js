@@ -30,6 +30,9 @@ vue.component('app-bar', vue.extend({
     methods: {
         toggleSettingsEnabled: function () {
             this.$set('settingsEnabled', !this.settingsEnabled);
+        },
+        openEmojisLink: function() {
+            window.open('https://www.webfx.com/tools/emoji-cheat-sheet/', '_blank');
         }
     }
 }));
