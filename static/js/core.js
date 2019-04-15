@@ -410,6 +410,7 @@ Transport.HelpMessage = 'Valid commands are: \n' +
     '/list for list of members in a group\n' +
     '/gif <gif-keywords> to send a gif \n' +
     '/join <group_name> to join a group (case-sensitive)\n' +
+    '/leave <group_name> to leave a group (case-sensitive)\n' +
     '/nick <new_name> for changing your nick (case-sensitive)\n' +
     '/switch <group_name> to switch to a joined group (case-sensitive)\n';
 
